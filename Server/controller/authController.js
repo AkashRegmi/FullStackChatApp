@@ -76,3 +76,8 @@ export const loginController = async (req, res) => {
     });
   }
 };
+
+export const getusers = async (req, res) => {
+  const user = await User.find().select("-password");
+  sendResponse(res, true, 201, "User Fetched Successfully", user);
+};
