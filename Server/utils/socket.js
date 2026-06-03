@@ -3,7 +3,6 @@ import Message from "../models/message.js";
 const onlineUsers = new Map();
 export const socketServer = (io) => {
   io.on("connection", (socket) => {
-    console.log("connect to the socket", socket.id);
     socket.on("onlineUser", async (userId) => {
       onlineUsers.set(userId, socket.id);
 
