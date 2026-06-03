@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Register = () => {
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const Register = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:4004/api/auth/register",
+        `${API_URL}/api/auth/register`,
         formData,
       );
 

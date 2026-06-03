@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
   const navigate = useNavigate();
 
@@ -26,10 +26,7 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:4004/api/auth/login",
-        formData,
-      );
+      const response = await axios.post(`${API_URL}/api/auth/login`, formData);
 
       localStorage.setItem("accessToken", response.data.data.accessToken);
 

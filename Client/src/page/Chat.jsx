@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { socket } from "../socket/socket";
 import { currentUser } from "../utils/decodeToken";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Chat = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -23,7 +23,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("accessToken");
-      const response = await axios.get("http://localhost:4004/api/auth/user", {
+      const response = await axios.get(`${API_URL}/api/auth/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ const Chat = () => {
       const getCurrentUser = currentUser();
       const token = localStorage.getItem("accessToken");
       const res = await axios.get(
-        `http://localhost:4004/api/auth/messages/${getCurrentUser.id}/${selectedUser._id}`,
+        `${API_URL}/api/auth/messages/${getCurrentUser.id}/${selectedUser._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
