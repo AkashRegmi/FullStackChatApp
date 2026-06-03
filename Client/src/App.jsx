@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./page/login";
+import Login from "./page/Login";
 import Register from "./page/Signup";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
