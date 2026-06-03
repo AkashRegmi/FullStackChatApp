@@ -28,7 +28,10 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: [
+      "http://localhost:5173",
+      "https://full-stack-chat-app-pi-gilt.vercel.app",
+    ],
   },
 });
 socketServer(io);
