@@ -5,6 +5,7 @@ import {
   generateAccessToken,
   generateRefereshToken,
 } from "../utils/generateToken.js";
+import Message from "../models/message.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -80,4 +81,21 @@ export const loginController = async (req, res) => {
 export const getusers = async (req, res) => {
   const user = await User.find().select("-password");
   sendResponse(res, true, 201, "User Fetched Successfully", user);
+};
+export const getMessages = async (req, res) => {
+  const { userId, otherUserId } = req.params;
+
+  const roomId = [userId, otherUserId].sort().join("_");
+
+  const messages = await Message.find({
+    $or: [
+      { sender: userId, receiver: otherUserId },
+      { sender: otherUserId, receiver: userId },
+    ],
+  }).sort({ createdAt: 1 });
+
+  res.json({
+    success: true,
+    data: messages,
+  });
 };

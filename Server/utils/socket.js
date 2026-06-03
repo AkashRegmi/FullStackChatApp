@@ -5,11 +5,12 @@ export const socketServer = (io) => {
   io.on("connection", (socket) => {
     console.log("connect to the socket", socket.id);
     socket.on("onlineUser", async (userId) => {
-      onlineUser.set(userId, socket.id);
+      onlineUsers.set(userId, socket.id);
+
       await User.findByIdAndUpdate(userId, {
         isOnline: true,
       });
-      io.emit("onlineUsers", Array.from(onlineUser.keys()));
+      io.emit("onlineUsers", Array.from(onlineUsers.keys()));
     });
     socket.on("joinRoom", ({ userId, otherUserId }) => {
       const roomId = [userId, otherUserId].sort().join("_");
