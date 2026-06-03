@@ -15,7 +15,14 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://full-stack-chat-app-pi-gilt.vercel.app",
+    ],
+  }),
+);
 
 const server = http.createServer(app);
 
